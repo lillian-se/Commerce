@@ -1,0 +1,84 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+
+
+<h2>View Listing</h2>
+<div class="listings"></div>
+<div class="card single-item">
+  <div class="single-item-container"></div>
+  <h3 class="title">{{ listing.title }}</h3>
+  {% if user.is_authenticated %}
+  <a href="{% url 'watchlist_add' listing.id %}" class="btn-upper btn-info">Add to watchlist</a>
+  {% endif %}
+  <h4 class="description">{{ listing.description }}</h4>
+  <h4 class="price">Current Price: ${{ listing.starting_bid }}</h4>
+  {% if user.is_authenticated %}
+  <p><strong style= "color:#17a2b8;">Bidding history</strong></p>
+  {% for user in listing.bid_item.all %}
+      <div>   
+          {{user.user}} -
+          $ {{user.price}}
+      </div>
+          
+  {% endfor %}
+  <br>
+  {% endif %}
+ 
+  <img src="{{ listing.image_url }}" alt="{{ listing.title }}" /><br />
+  <a href="{% url 'index'  %}" class="btn btn-info">Back to active listings</a>
+
+  {% if user.is_authenticated %}
+  {% if request.user != listing.user and listing.active %}
+  <h4>Place Bid</h4>
+ 
+<form action="" method='POST'>
+  {% csrf_token %}
+  <input type="number" name="bid">
+  <input type="submit" class = "btn btn-info" id = "place-bid" value= "Place bid" style= "display: inline-block;">
+</form>
+<p>Must be higher than current price</p>
+
+
+{% else %}
+
+<form action="{% url 'close' listing.id %}" method="POST">
+  {% csrf_token %}
+  <input type="submit" name="deactivate" class="btn btn-warning btn-close"value="Close Listing"></input>
+</form>
+
+{% endif %}
+  <hr>
+  <p>Listed by: {{ listing.user }}</p>
+  <p class="timestamp">Created: {{ listing.date_created}}</p>
+  
+
+</div>
+</div>
+
+
+
+<div class="card single-item">
+  <div class="single-item-container">
+<h3>Add comment</h3>
+<form action="{% url 'comment' listing.id %}" method='POST'>
+  {% csrf_token %}
+  <textarea name="comment"  cols="30" rows="5"></textarea>
+  <input type="submit" class = "btn btn-info" value= "Add comment" style= "display: inline-block;">
+</form>
+</div>
+<h4>Comments made</h4>
+<ul style="list-style-type: none;">
+  {% for com in comments %}
+  <div class = "comments">
+  <li>{{ com }}</li>
+  </div>
+  {% endfor %}
+
+</ul>
+</div>
+
+</div>
+{% endif %}
+{% endblock body %}

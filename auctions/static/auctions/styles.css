@@ -1,0 +1,99 @@
+body {
+    padding: 50px;
+    width: 100%;
+}
+.listings{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+#watchcount{
+    color: white;
+    background: #17a2b8;
+    margin-left:0.3em;
+    padding:0.2em 0.5em;
+}
+.card{
+   width: 400px;
+    /* border: 5px solid black; */
+    box-shadow:  5px 10px 8px #ccc7c7;
+    padding: 3em;
+    margin: 1em;
+}
+.title{
+    color:#17a2b8;
+    padding-bottom: 20px;
+}
+.description{
+    font-size: 1em;
+}
+.price{
+    font-size: 1.5em;
+}
+.comments{
+    border: 1px solid #17a2b8;
+    padding: 10px;
+    margin-left: -50px;
+    border-radius: 5px;
+    margin-bottom:10px;
+}
+#place-bid{
+    margin-bottom: 120px;
+}
+.btn-close{
+    margin-bottom: 120px;
+}
+.timestamp{
+    position:absolute;
+    bottom: -10px;
+    font-size: 0.75em;
+    
+}
+.btn{
+    position: absolute;
+    right:20px;
+    bottom: 40px;
+    box-shadow:  5px 10px 8px #ccc7c7;
+}
+.btn-upper{
+    position: absolute;
+    padding:0.5em 1em;
+    border-radius: 5px;
+    right:20px;
+    top: 40px;
+    box-shadow:  5px 10px 8px #ccc7c7;
+}
+
+.card img{
+  width: 40%;
+    height: auto;
+}
+.single-listing{
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+}
+.single-item-containter{
+    box-shadow:  5px 10px 8px #ccc7c7;
+    padding: 3em;
+    width: 30%;
+    margin: 0 auto;
+    }
+.single-img{
+    margin: 20px auto;
+    max-width: 40%;
+    height: auto;
+}
+.single-title{
+color: green;
+}
+.single-description{
+    color: black;
+}
+.single-price{
+    color: green;
+}
+.single-timestamp{
+    color: green;
+}

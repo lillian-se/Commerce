@@ -1,0 +1,24 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    <div class="listings">
+    {% for item in items %}
+        {% if item.active %}
+    <div class="card">
+        <h3 class="title">{{ item.title }}</h3>
+        <h4 class="description">{{ item.description }}</h4>
+        <h4 class="price">Price: $ {{ item.starting_bid }}</h4>
+        <img src="{{ item.image_url }}" alt="{{ item.title }}" /><br/>
+
+        <a href="{% url 'listing' item.id %}" class="btn btn-info">View Item</a>
+
+        <p class="timestamp">Created: {{ item.date_created}}</p>
+    </div>
+  
+    {% endif %}
+{% endfor %}
+</div>
+
+  
+{% endblock body %}

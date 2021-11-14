@@ -1,0 +1,53 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Your Watchlist</h2>
+    <div class="listings">
+      {% if items %}
+      {% for item in items %}
+      
+      <div class="card">
+      
+      <h3 class="title">{{ item.listing.title }}</h3>
+      <a href="{% url 'watchlist_remove' item.listing.id %}" class="btn-upper btn-info">Remove</a>
+      <h4 class="description">{{ item.listing.description }}</h4>
+      <h4 class="price">Price: ${{ item.listing.starting_bid }}</h4>
+      {% if item.listing.active %}
+      <p><strong style= "color:#17a2b8;">Bidding history</strong></p>
+      {% for user in item.listing.bid_item.all %}
+      <div>   
+          {{user.user}} -
+          $ {{user.price}}
+      </div>
+     
+      {% endfor %}
+      {% endif %}
+      {% if  user == item.listing.user and not item.listing.active%}
+      <h2>Winner is {{ item.listing.bid_item.last.user}}</h2>
+      {% elif  user == item.listing.bid_item.last.user and not item.listing.active%}
+      <h2>Winner is You</h2>
+      {% elif  not item.listing.active%}
+      <h2>Item is sold to another buyer</h2>
+      {% endif %}
+     
+
+      <br>
+      <img src="{{ item.listing.image_url }}" alt="{{ item.title }}" /><br/>
+      
+      
+      <a href="{% url 'listing' item.listing.id %}" class="btn btn-info">View Item</a>
+      
+      <p class="timestamp">Created: {{ item.listing.date_created}}</p>
+      </div>
+      {% endfor %}
+      {% else%}
+      <h2>No items in watchlist</h2>
+     {% endif%}
+      
+      
+  
+
+</div>
+
+   
+{% endblock body %}
